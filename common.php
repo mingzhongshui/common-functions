@@ -5,12 +5,30 @@
  * @Email:    in1993summer@163.com
  * @Date:     2018-01-04 17:30:31
  * @Describe: php
- * @Last Modified time: 2018-01-05 10:45:06
+ * @Last Modified time: 2018-01-05 10:51:56
  */
 
 
 /**
- * 多维数组树形结构
+ * 无限分类生成多维数组树形结构
+ * 结果：
+ * [
+ *     [
+ *         'id' => '1',
+ *         'name' => 'test',
+ *         'childs' => [
+ *             [
+ *                 'id' => '5',
+ *                 'name' => 'echo',
+ *                 'childs' => [
+ *                     [
+ *                         'id'    => '9',
+ *                          'name' => 'printf',
+ *                     ]
+ *             ]
+ *         ]
+ *     ]
+ * ]
  */
 function tree($data, $pid = 0)
 {
@@ -67,11 +85,24 @@ function pe($arr)
     exit;
 }
 
-// 递归运算返回值创建html树结构
+/**
+ * 递归运算返回值创建html树结构
+ * @param  array $tree 树形数组
+ * @return html 
+ * 中国
+ *     北京
+ *         朝阳区
+ *     河南
+ *         郑州市
+ *         洛阳市
+ * 美国
+ *     纽约
+ *     加利福尼亚   
+ */
 function creatHtmlTree1($tree)
 {
     // $htmlTree为普通局部变量;
-    $htmlTree .= '<ul>';
+    $htmlTree = '<ul>';
     
     foreach ($tree as $key => $value) {
         // 给变量$htmlTree累加值
@@ -87,7 +118,20 @@ function creatHtmlTree1($tree)
     return $htmlTree;
 }
 
-// 递归运算静态变量创建html树结构
+/**
+ * 递归运算静态变量创建html树结构
+ * @param  array $tree 树形数组
+ * @return html 
+ * 中国
+ *     北京
+ *         朝阳区
+ *     河南
+ *         郑州市
+ *         洛阳市
+ * 美国
+ *     纽约
+ *     加利福尼亚   
+ */
 function creatHtmlTree($tree)
 {
     // 声明静态变量
