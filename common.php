@@ -5,7 +5,7 @@
  * @Email:    in1993summer@163.com
  * @Date:     2018-01-04 17:30:31
  * @Describe: php
- * @Last Modified time: 2018-01-04 17:31:45
+ * @Last Modified time: 2018-01-05 10:45:06
  */
 
 
@@ -65,4 +65,43 @@ function pe($arr)
     echo '========================结束========================';
     echo "</pre>";
     exit;
+}
+
+// 递归运算返回值创建html树结构
+function creatHtmlTree1($tree)
+{
+    // $htmlTree为普通局部变量;
+    $htmlTree .= '<ul>';
+    
+    foreach ($tree as $key => $value) {
+        // 给变量$htmlTree累加值
+        $htmlTree .= "<li><span><i class='icon-folder-open'></i>{$value['name']} </span> <a href=''>Goes somewhere</a>";
+        if (isset($value['childs']) && is_array($value['childs'])) {
+            // 递归中每次的结果累加到$htmlTree
+            $htmlTree .= creatHtmlTree($value['childs']);
+        } 
+        $htmlTree .= "</li>";
+    }
+    // 赋值ul闭合标签
+    $htmlTree .= "</ul>";
+    return $htmlTree;
+}
+
+// 递归运算静态变量创建html树结构
+function creatHtmlTree($tree)
+{
+    // 声明静态变量
+    static $htmlTree;
+    $htmlTree .= '<ul>';
+    foreach ($tree as $key => $value) {
+        // 给静态$htmlTree变量累加值
+        $htmlTree .= "<li><span><i class='icon-folder-open'></i>{$value['name']} </span> <a href=''>Goes somewhere</a>";
+        if (isset($value['childs']) && is_array($value['childs'])) {
+            creatHtmlTree($value['childs']);
+        } 
+        $htmlTree .= "</li>";
+    }
+    // 赋值ul闭合标签
+    $htmlTree .= "</ul>";
+    return $htmlTree;
 }
